@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>गुण मिलान जनरेटर</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1 class="title">गुण मिलान जनरेटर</h1>
+    </header>
+
+    <main class="main">
+      <form id="gun-milan-form" class="form card" novalidate>
+        <!-- Top Right Section -->
+        <section class="form-section section-top-right">
+          <div class="top-right-fields">
+            <div class="field">
+              <label for="kramank">क्रमांक</label>
+              <input type="text" id="kramank" name="kramank" placeholder="उदा. 3071" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="dinank">दिनांक</label>
+              <input type="date" id="dinank" name="dinank">
+            </div>
+          </div>
+        </section>
+
+        <!-- Center Hardcoded Heading (display only in form) -->
+        <section class="form-section section-heading">
+          <p class="hardcoded-heading" aria-hidden="true">॥ गुण मिलान ॥</p>
+        </section>
+
+        <!-- वर और कन्या -->
+        <section class="form-section section-varkanya">
+          <div class="varkanya-grid">
+            <!-- वर -->
+            <div class="column var-column">
+              <h2 class="column-title">वर</h2>
+              <div class="field">
+                <label for="var-name">नाम</label>
+                <input type="text" id="var-name" name="var_name" placeholder="उदा. चि. अभिषेक बैरागी" required>
+              </div>
+              <div class="field">
+                <label for="var-dob">जन्म तिथि</label>
+                <input type="text" id="var-dob" name="var_dob" placeholder="उदा. 08.04.95" required>
+              </div>
+              <div class="field">
+                <label for="var-time">जन्म समय</label>
+                <input type="text" id="var-time" name="var_time" placeholder="उदा. 03:05" required>
+              </div>
+              <div class="field">
+                <label for="var-place">जन्म स्थान</label>
+                <input type="text" id="var-place" name="var_place" placeholder="उदा. आसींद" required>
+              </div>
+              <div class="field">
+                <label for="var-rashi">राशि</label>
+                <input type="text" id="var-rashi" name="var_rashi" placeholder="उदा. मिथुन" required>
+              </div>
+              <div class="field">
+                <label for="var-nakshatra">नक्षत्र</label>
+                <input type="text" id="var-nakshatra" name="var_nakshatra" placeholder="उदा. पुनर्वसु I (के)" required>
+              </div>
+              <div class="field">
+                <label for="var-mangal">मंगल</label>
+                <input type="text" id="var-mangal" name="var_mangal" placeholder="उदा. सप्तम मंगल (कर्क)" required>
+              </div>
+            </div>
+
+            <!-- कन्या -->
+            <div class="column kanya-column">
+              <h2 class="column-title">कन्या</h2>
+              <div class="field">
+                <label for="kanya-name">नाम</label>
+                <input type="text" id="kanya-name" name="kanya_name" placeholder="उदा. कु. रूपल वैष्णव" required>
+              </div>
+              <div class="field">
+                <label for="kanya-dob">जन्म तिथि</label>
+                <input type="text" id="kanya-dob" name="kanya_dob" placeholder="उदा. 25.03.95" required>
+              </div>
+              <div class="field">
+                <label for="kanya-time">जन्म समय</label>
+                <input type="text" id="kanya-time" name="kanya_time" placeholder="उदा. 09:05" required>
+              </div>
+              <div class="field">
+                <label for="kanya-place">जन्म स्थान</label>
+                <input type="text" id="kanya-place" name="kanya_place" placeholder="उदा. रावतभाटा" required>
+              </div>
+              <div class="field">
+                <label for="kanya-rashi">राशि</label>
+                <input type="text" id="kanya-rashi" name="kanya_rashi" placeholder="उदा. धनु" required>
+              </div>
+              <div class="field">
+                <label for="kanya-nakshatra">नक्षत्र</label>
+                <input type="text" id="kanya-nakshatra" name="kanya_nakshatra" placeholder="उदा. उत्तराषाढ़ा 1 (भे)" required>
+              </div>
+              <div class="field">
+                <label for="kanya-mangal">मंगल</label>
+                <input type="text" id="kanya-mangal" name="kanya_mangal" placeholder="उदा. चतुर्थ मंगल (कर्क)" required>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- कुल गुण -->
+        <section class="form-section section-kul-gun">
+          <div class="field field-centered">
+            <label for="kul-gun">कुल गुण</label>
+            <input type="text" id="kul-gun" name="kul_gun" placeholder="उदा. 27/36" required>
+          </div>
+        </section>
+
+        <!-- विवरण -->
+        <section class="form-section section-vivaran">
+          <div class="field">
+            <label for="vivaran">विवरण</label>
+            <textarea id="vivaran" name="vivaran" rows="5" placeholder="गुण मिलान का विवरण लिखें..." required></textarea>
+          </div>
+        </section>
+
+        <!-- निष्कर्ष -->
+        <section class="form-section section-nishkarsh">
+          <div class="field">
+            <label for="nishkarsh">निष्कर्ष</label>
+            <input type="text" id="nishkarsh" name="nishkarsh" placeholder="उदा. श्रेष्ठ मिलान" required>
+          </div>
+        </section>
+
+        <!-- Buttons -->
+        <section class="form-section section-actions">
+          <button type="submit" class="btn btn-primary" id="btn-generate">जनरेट करें</button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary" id="btn-reset">रीसेट करें</button>
+            <button type="button" class="btn btn-secondary" id="btn-print" disabled>प्रिंट करें</button>
+          </div>
+        </section>
+      </form>
+
+      <!-- Preview Section (hidden until generated) -->
+      <section id="preview-section" class="preview-section" aria-live="polite" hidden>
+        <h2 class="preview-title">पूर्वावलोकन</h2>
+        <div id="preview-wrapper" class="preview-wrapper">
+          <div id="preview-scaled" class="preview-scaled">
+            <div id="document-preview" class="document-preview">
+              <!-- Generated content injected here -->
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-download" id="btn-download">डाउनलोड करें</button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>व्योमाभ ज्योतिर्विज्ञान शोध केन्द्र</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
