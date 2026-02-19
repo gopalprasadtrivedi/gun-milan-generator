@@ -17,16 +17,22 @@
 
     <main class="main">
       <form id="gun-milan-form" class="form card" novalidate>
-        <!-- Top Right Section -->
-        <section class="form-section section-top-right">
-          <div class="top-right-fields">
-            <div class="field">
-              <label for="kramank">क्रमांक</label>
-              <input type="text" id="kramank" name="kramank" placeholder="उदा. 3071" autocomplete="off">
+        <!-- Top: प्रति (left), क्रमांक/दिनांक (right) -->
+        <section class="form-section section-top-fields">
+          <div class="top-fields-row">
+            <div class="field top-left-field">
+              <label for="prati">प्रति</label>
+              <input type="text" id="prati" name="prati" placeholder="उदा. श्री कृष्ण वल्लागली बेरमणी" autocomplete="off">
             </div>
-            <div class="field">
-              <label for="dinank">दिनांक</label>
-              <input type="date" id="dinank" name="dinank">
+            <div class="top-right-fields">
+              <div class="field">
+                <label for="kramank">क्रमांक</label>
+                <input type="text" id="kramank" name="kramank" placeholder="उदा. 3071" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="dinank">दिनांक</label>
+                <input type="date" id="dinank" name="dinank">
+              </div>
             </div>
           </div>
         </section>
@@ -134,25 +140,9 @@
         <!-- Buttons -->
         <section class="form-section section-actions">
           <button type="submit" class="btn btn-primary" id="btn-generate">जनरेट करें</button>
-          <div class="btn-group">
-            <button type="button" class="btn btn-secondary" id="btn-reset">रीसेट करें</button>
-            <button type="button" class="btn btn-secondary" id="btn-print" disabled>प्रिंट करें</button>
-          </div>
+          <button type="button" class="btn btn-secondary" id="btn-reset">रीसेट करें</button>
         </section>
       </form>
-
-      <!-- Preview Section (hidden until generated) -->
-      <section id="preview-section" class="preview-section" aria-live="polite" hidden>
-        <h2 class="preview-title">पूर्वावलोकन</h2>
-        <div id="preview-wrapper" class="preview-wrapper">
-          <div id="preview-scaled" class="preview-scaled">
-            <div id="document-preview" class="document-preview">
-              <!-- Generated content injected here -->
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn btn-download" id="btn-download">डाउनलोड करें</button>
-      </section>
     </main>
 
     <footer class="footer">
