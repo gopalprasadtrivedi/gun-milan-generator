@@ -13,25 +13,13 @@
   const DD_MM_YYYY = true; // Date in document as DD-MM-YY
 
   // --- DOM refs (set when DOM is ready) ---
-  var form, previewSection, previewWrapper, previewScaled, documentPreview, btnGenerate, btnDownload, btnReset, btnPrint;
+  var form, btnGenerate, btnReset;
 
   var TEMPLATE_W = 1700;
   var TEMPLATE_H = 2500;
 
   function getEl(id) {
     return document.getElementById(id);
-  }
-
-  /** Scale preview so entire 1700x2500 fits in viewport without scrolling */
-  function fitPreviewInViewport() {
-    if (!previewWrapper || !previewScaled || !documentPreview) return;
-    var w = previewWrapper.clientWidth - 32;
-    var h = Math.min(previewWrapper.clientHeight - 32, Math.floor(window.innerHeight * 0.85) - 32);
-    if (w < 100 || h < 100) return;
-    var scale = Math.min(w / TEMPLATE_W, h / TEMPLATE_H, 1);
-    previewScaled.style.width = (TEMPLATE_W * scale) + 'px';
-    previewScaled.style.height = (TEMPLATE_H * scale) + 'px';
-    documentPreview.style.transform = 'scale(' + scale + ')';
   }
 
   /**
@@ -55,7 +43,7 @@
   function getFormData() {
     const data = {};
     const names = [
-      'kramank', 'dinank',
+      'prati', 'kramank', 'dinank',
       'var_name', 'var_dob', 'var_time', 'var_place', 'var_rashi', 'var_nakshatra', 'var_mangal',
       'kanya_name', 'kanya_dob', 'kanya_time', 'kanya_place', 'kanya_rashi', 'kanya_nakshatra', 'kanya_mangal',
       'kul_gun', 'vivaran', 'nishkarsh'
@@ -94,111 +82,28 @@
   }
 
   /**
-   * Build the generated document HTML and set letterhead background
-   */
-  function buildPreview(data) {
-    const dinankDisplay = data.dinank_formatted || data.dinank || '';
-
-    const inner = document.createElement('div');
-    inner.className = 'doc-inner';
-
-    // Top right: क्रमांक, दिनांक
-    const topRight = document.createElement('div');
-    topRight.className = 'doc-top-right';
-    topRight.innerHTML = `क्रमांक: ${escapeHtml(data.kramank || '')}<br>दिनांक: ${escapeHtml(dinankDisplay)}`;
-    inner.appendChild(topRight);
-
-    // Center heading
-    const heading = document.createElement('p');
-    heading.className = 'doc-heading';
-    heading.textContent = '॥ गुण मिलान ॥';
-    inner.appendChild(heading);
-
-    // वर और कन्या: labels once on left; जन्म = two lines (date/time, then place)
-    const varkanya = document.createElement('div');
-    varkanya.className = 'doc-varkanya';
-    const varJnamLine1 = (data.var_dob || '') + '/' + (data.var_time || '');
-    const varJnamLine2 = data.var_place || '';
-    const kanyaJnamLine1 = (data.kanya_dob || '') + '/' + (data.kanya_time || '');
-    const kanyaJnamLine2 = data.kanya_place || '';
-    varkanya.innerHTML = `
-      <div class="doc-varkanya-head">
-        <span class="doc-label-col"></span>
-        <span class="doc-var-col">वर</span>
-        <span class="doc-kanya-col">कन्या</span>
-      </div>
-      <div class="doc-varkanya-row"><strong class="doc-label-col">नाम -</strong><span class="doc-var-col">${escapeHtml(data.var_name || '')}</span><span class="doc-kanya-col">${escapeHtml(data.kanya_name || '')}</span></div>
-      <div class="doc-varkanya-row doc-janm-row">
-        <strong class="doc-label-col">जन्म -</strong>
-        <span class="doc-var-col"><span class="doc-janm-line1">${escapeHtml(varJnamLine1)}</span><span class="doc-janm-line2">${escapeHtml(varJnamLine2)}</span></span>
-        <span class="doc-kanya-col"><span class="doc-janm-line1">${escapeHtml(kanyaJnamLine1)}</span><span class="doc-janm-line2">${escapeHtml(kanyaJnamLine2)}</span></span>
-      </div>
-      <div class="doc-varkanya-row"><strong class="doc-label-col">राशि -</strong><span class="doc-var-col">${escapeHtml(data.var_rashi || '')}</span><span class="doc-kanya-col">${escapeHtml(data.kanya_rashi || '')}</span></div>
-      <div class="doc-varkanya-row"><strong class="doc-label-col">नक्षत्र -</strong><span class="doc-var-col">${escapeHtml(data.var_nakshatra || '')}</span><span class="doc-kanya-col">${escapeHtml(data.kanya_nakshatra || '')}</span></div>
-      <div class="doc-varkanya-row"><strong class="doc-label-col">मंगल -</strong><span class="doc-var-col">${escapeHtml(data.var_mangal || '')}</span><span class="doc-kanya-col">${escapeHtml(data.kanya_mangal || '')}</span></div>
-    `;
-    inner.appendChild(varkanya);
-
-    // कुल गुण (bold value, box fits text)
-    const kulGun = document.createElement('div');
-    kulGun.className = 'doc-kul-gun';
-    kulGun.innerHTML = `गुण - <span class="value">${escapeHtml(data.kul_gun || '')}</span>`;
-    inner.appendChild(kulGun);
-
-    // विवरण
-    const vivaran = document.createElement('div');
-    vivaran.className = 'doc-vivaran';
-    vivaran.textContent = data.vivaran || '';
-    inner.appendChild(vivaran);
-
-    // निष्कर्ष (bold value in box that fits)
-    const nishkarsh = document.createElement('div');
-    nishkarsh.className = 'doc-nishkarsh';
-    nishkarsh.innerHTML = `निष्कर्ष:- <span class="value">${escapeHtml(data.nishkarsh || '')}</span>`;
-    inner.appendChild(nishkarsh);
-
-    documentPreview.innerHTML = '';
-    documentPreview.appendChild(inner);
-
-    documentPreview.style.backgroundImage = `url(${LETTERHEAD_URL})`;
-    documentPreview.style.backgroundColor = 'transparent';
-    inner.style.background = 'transparent';
-  }
-
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  /**
-   * Generate document: validate, build preview, show section, enable print
+   * Generate and download: validate, then draw on canvas and trigger download.
    */
   function onGenerate(e) {
     e.preventDefault();
 
-    const missing = validateForm();
+    var missing = validateForm();
     if (missing) {
       alert('कृपया यह फ़ील्ड भरें: ' + missing);
       return;
     }
 
-    const data = getFormData();
-    buildPreview(data);
-    previewSection.hidden = false;
-    documentPreview.style.transform = '';
-    fitPreviewInViewport();
-    previewSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    btnPrint.disabled = false;
+    generateAndDownload(getFormData());
   }
 
   /**
-   * Download: draw letterhead image then burn text on it via Canvas API (same as preview).
+   * Draw letterhead + text on canvas and trigger PNG download.
    */
-  function onDownload() {
-    var data = getFormData();
-    btnDownload.disabled = true;
-    btnDownload.textContent = 'बन रहा है...';
+  function generateAndDownload(data) {
+    if (btnGenerate) {
+      btnGenerate.disabled = true;
+      btnGenerate.textContent = 'बन रहा है...';
+    }
 
     var img = new Image();
     img.crossOrigin = 'anonymous';
@@ -212,23 +117,25 @@
 
         var FONT = '"Noto Sans Devanagari"';
         var contentStart = 760;
-        var padLeft = 100;
+        var padLeft = 70;
         var padRight = 120;
         var centerX = 850;
-        var blockW = 1000;
-        var gap = 100;
-        var colW = (blockW - gap) / 2;
-        var leftColX = padLeft + (TEMPLATE_W - padLeft - padRight - blockW) / 2;
-        var rightColX = leftColX + colW + gap;
+        var colW = 450;
+        var leftColX = 310;
+        var gapBetweenCols = 110;
+        var kanyaColX = 1010;
+        var varColX = leftColX + 140;
         var lineHSm = 50;
         var y = contentStart + 24;
 
         ctx.fillStyle = '#1a1a1a';
-        ctx.textAlign = 'right';
+        ctx.textAlign = 'left';
         ctx.font = '44px ' + FONT;
-        ctx.fillText('क्रमांक: ' + (data.kramank || ''), TEMPLATE_W - padRight, y);
+        ctx.fillText('प्रति - ' + (data.prati || ''), padLeft + 32, y + 32);
+        ctx.textAlign = 'right';
+        ctx.fillText('क्रमांक: ' + (data.kramank || ''), TEMPLATE_W - padRight, y+8);
         y += 50;
-        ctx.fillText('दिनांक: ' + (data.dinank_formatted || data.dinank || ''), TEMPLATE_W - padRight, y);
+        ctx.fillText('दिनांक: ' + (data.dinank_formatted || data.dinank || ''), TEMPLATE_W - padRight, y+8);
         y += 70;
 
         ctx.textAlign = 'center';
@@ -238,9 +145,6 @@
         y += 85;
 
         var labelColX = leftColX;
-        var varColX = leftColX + 140;
-        var gapBetweenCols = 80;
-        var kanyaColX = varColX + colW + gapBetweenCols;
 
         ctx.textAlign = 'left';
         ctx.fillStyle = '#1a1a1a';
@@ -342,55 +246,48 @@
         console.error(err);
         alert('चित्र बनाते समय त्रुटि। पृष्ठ रीफ़्रेश करके दोबारा कोशिश करें।');
       }
-      btnDownload.disabled = false;
-      btnDownload.textContent = 'डाउनलोड करें';
     };
     img.onerror = function () {
       alert('लेटरहेड चित्र लोड नहीं हो पाया। सर्वर चल रहा है और letterhead.png उसी फ़ोल्डर में है यह जाँचें।');
-      btnDownload.disabled = false;
-      btnDownload.textContent = 'डाउनलोड करें';
+    };
+    function restoreButton() {
+      if (btnGenerate) {
+        btnGenerate.disabled = false;
+        btnGenerate.textContent = 'जनरेट करें';
+      }
+    }
+    var origOnload = img.onload;
+    img.onload = function () {
+      try {
+        origOnload.call(this);
+      } finally {
+        restoreButton();
+      }
+    };
+    var origOnerror = img.onerror;
+    img.onerror = function () {
+      try {
+        origOnerror.call(this);
+      } finally {
+        restoreButton();
+      }
     };
     img.src = LETTERHEAD_URL;
   }
 
-  /**
-   * Print the preview (hides form/buttons via CSS)
-   */
-  function onPrint() {
-    window.print();
-  }
-
-  /**
-   * Reset form and hide preview
-   */
   function onReset() {
     form.reset();
-    previewSection.hidden = true;
-    documentPreview.innerHTML = '';
-    documentPreview.style.backgroundImage = '';
-    btnPrint.disabled = true;
   }
 
   function init() {
     form = getEl('gun-milan-form');
-    previewSection = getEl('preview-section');
-    previewWrapper = getEl('preview-wrapper');
-    previewScaled = getEl('preview-scaled');
-    documentPreview = getEl('document-preview');
     btnGenerate = getEl('btn-generate');
-    btnDownload = getEl('btn-download');
     btnReset = getEl('btn-reset');
-    btnPrint = getEl('btn-print');
 
-    if (!form || !documentPreview) return;
+    if (!form) return;
 
     form.addEventListener('submit', onGenerate);
-    if (btnDownload) btnDownload.addEventListener('click', onDownload);
-    if (btnPrint) btnPrint.addEventListener('click', onPrint);
     if (btnReset) btnReset.addEventListener('click', onReset);
-    window.addEventListener('resize', function () {
-      if (previewSection && !previewSection.hidden) fitPreviewInViewport();
-    });
   }
 
   if (document.readyState === 'loading') {
