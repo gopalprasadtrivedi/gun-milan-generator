@@ -1,0 +1,516 @@
+/* ============================================
+   गुण मिलान जनरेटर - Mobile-first styles
+   ============================================ */
+
+:root {
+  /* Template: 1700 x 2500 px (portrait), matching Mac Preview / image pixel dimensions. */
+  --template-width: 1700px;
+  --template-height: 2500px;
+  /* Where content starts (px from top). If letterhead is shorter, try 400–500; if longer, increase. */
+  --content-start: 760px;
+  --content-bottom-padding: 48px;
+  --content-area-height: calc(var(--template-height) - var(--content-start) - var(--content-bottom-padding));
+  --font-hindi: "Noto Sans Devanagari", sans-serif;
+  --color-saffron: #e85d04;
+  --color-saffron-light: #f48c06;
+  --color-red-accent: #9d0208;
+  --color-text: #1a1a1a;
+  --color-text-muted: #4a4a4a;
+  --color-bg: #faf8f5;
+  --color-card: #ffffff;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 20px rgba(232, 93, 4, 0.12);
+  --radius: 8px;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-hindi);
+  font-weight: 400;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- Header ----- */
+.header {
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-saffron) 0%, var(--color-red-accent) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-card);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ----- Main ----- */
+.main {
+  flex: 1;
+  padding: var(--space-md);
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ----- Card Form ----- */
+.form.card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  border: 1px solid rgba(232, 93, 4, 0.1);
+}
+
+.form-section {
+  margin-bottom: var(--space-lg);
+}
+
+.form-section:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Top Right Section - right align on desktop */
+.section-top-right .top-right-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: flex-end;
+}
+
+.section-top-right .field {
+  min-width: 140px;
+  max-width: 180px;
+}
+
+/* Center heading (non-editable) */
+.section-heading {
+  text-align: center;
+}
+
+.hardcoded-heading {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-red-accent);
+}
+
+/* वर और कन्या - stacked on mobile */
+.varkanya-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.column-title {
+  margin: 0 0 var(--space-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-saffron);
+  padding-bottom: var(--space-xs);
+  border-bottom: 2px solid var(--color-saffron-light);
+}
+
+.column {
+  padding: var(--space-md);
+  background: rgba(248, 236, 228, 0.4);
+  border-radius: var(--radius);
+  border: 1px solid rgba(232, 93, 4, 0.15);
+}
+
+/* Fields */
+.field {
+  margin-bottom: var(--space-md);
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  font-family: var(--font-hindi);
+  font-size: 1rem;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  color: var(--color-text);
+  background: #fff;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-saffron);
+  box-shadow: 0 0 0 3px rgba(232, 93, 4, 0.15);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.section-kul-gun .field-centered {
+  text-align: center;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Buttons */
+.section-actions {
+  padding-top: var(--space-md);
+}
+
+.btn {
+  font-family: var(--font-hindi);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: var(--space-md) var(--space-lg);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-saffron) 0%, var(--color-red-accent) 100%);
+  color: #fff;
+  margin-bottom: var(--space-md);
+  box-shadow: 0 2px 8px rgba(232, 93, 4, 0.35);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 14px rgba(232, 93, 4, 0.45);
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: var(--color-text);
+  flex: 1;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e5e5e5;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-group {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.btn-download {
+  width: 100%;
+  margin-top: var(--space-md);
+  background: #0d6efd;
+  color: #fff;
+}
+
+.btn-download:hover {
+  background: #0b5ed7;
+}
+
+/* ----- Preview Section ----- */
+.preview-section {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.preview-title {
+  margin: 0 0 var(--space-lg);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.preview-wrapper {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--space-md);
+  background: #e8e8e8;
+  border-radius: var(--radius);
+  max-height: 85vh;
+  border: none;
+}
+
+/* Scaled container so full 1700x2500 preview fits without scrolling (JS sets size) */
+.preview-scaled {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Document preview: 1700x2500 px. No white box – only letterhead + text. */
+.document-preview {
+  position: relative;
+  width: var(--template-width);
+  height: var(--template-height);
+  flex-shrink: 0;
+  background-size: var(--template-width) var(--template-height);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent !important;
+  padding-top: var(--content-start);
+  padding-left: 100px;
+  padding-right: 120px;
+  padding-bottom: var(--content-bottom-padding);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  margin: 0;
+  border: none;
+  transform-origin: top left;
+}
+
+/* Content: fully transparent so letterhead shows through */
+.document-preview .doc-inner {
+  font-family: var(--font-hindi);
+  font-size: 46px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  height: var(--content-area-height);
+  max-height: var(--content-area-height);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: transparent !important;
+}
+
+/* क्रमांक/दिनांक: keep smaller, do not increase */
+.doc-top-right {
+  text-align: right;
+  margin-bottom: 16px;
+  font-size: 44px;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.doc-heading {
+  text-align: center;
+  font-weight: 700;
+  font-size: 60px;
+  margin: 0 0 28px;
+  color: var(--color-red-accent);
+  flex-shrink: 0;
+  background: transparent;
+}
+
+/* वर/कन्या: labels once on left, then वर and कन्या value columns */
+.doc-varkanya {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  flex-shrink: 0;
+  background: transparent;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.doc-varkanya-head {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr;
+  gap: 24px 32px;
+  font-size: 50px;
+  font-weight: 700;
+  text-decoration: underline;
+  margin-bottom: 4px;
+}
+
+.doc-varkanya-head .doc-label-col { visibility: hidden; }
+
+.doc-varkanya-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr;
+  gap: 24px 32px;
+  align-items: baseline;
+  font-size: 46px;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.doc-varkanya-row.doc-janm-row {
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.doc-janm-line1,
+.doc-janm-line2 {
+  display: block;
+}
+
+.doc-janm-line2 {
+  margin-top: 2px;
+}
+
+.doc-label-col {
+  font-weight: 700;
+}
+
+.doc-var-col,
+.doc-kanya-col {
+  min-width: 0;
+  word-break: break-word;
+}
+
+/* कुल गुण: more vertical space above and below */
+.doc-kul-gun {
+  width: 100%;
+  text-align: center;
+  margin-top: 56px;
+  margin-bottom: 44px;
+  flex-shrink: 0;
+  font-size: 48px;
+  background: transparent;
+}
+
+.doc-kul-gun .value {
+  display: inline-block;
+  padding: 10px 28px;
+  min-width: 2em;
+  border: 2px solid var(--color-text);
+  font-weight: 700;
+}
+
+/* विवरण: left margin; more vertical space above and below */
+.doc-vivaran {
+  margin: 28px 0 52px 0;
+  margin-left: 36px;
+  white-space: pre-wrap;
+  font-size: 44px;
+  line-height: 1.5;
+  min-height: 140px;
+  overflow: auto;
+  color: #1a1a1a;
+  text-align: left;
+  background: transparent;
+}
+
+/* निष्कर्ष: more space above; bold value in box that fits */
+.doc-nishkarsh {
+  flex-shrink: 0;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 600;
+  background: transparent;
+}
+
+.doc-nishkarsh .value {
+  display: inline-block;
+  padding: 12px 28px;
+  min-width: 2em;
+  border: 2px solid var(--color-text);
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+/* ----- Footer ----- */
+.footer {
+  padding: var(--space-md);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid #eee;
+  margin-top: auto;
+}
+
+/* ----- Desktop: two columns for वर/कन्या ----- */
+@media (min-width: 640px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .varkanya-grid {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .column {
+    flex: 1;
+  }
+
+  .form.card:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+/* Print styles */
+@media print {
+  .header,
+  .form.card,
+  .section-actions,
+  .btn-download,
+  .preview-title,
+  .footer {
+    display: none !important;
+  }
+
+  .preview-section {
+    display: block !important;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .preview-wrapper {
+    background: none;
+    padding: 0;
+    max-height: none;
+  }
+
+  .document-preview {
+    box-shadow: none;
+  }
+}
