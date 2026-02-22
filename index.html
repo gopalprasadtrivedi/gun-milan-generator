@@ -17,6 +17,17 @@
 
     <main class="main">
       <form id="gun-milan-form" class="form card" novalidate>
+        <!-- Document type: Gun Milan or General -->
+        <section class="form-section section-doc-type">
+          <div class="field">
+            <label for="doc-type">प्रकार</label>
+            <select id="doc-type" name="doc_type">
+              <option value="gun_milan">गुण मिलान</option>
+              <option value="general">General</option>
+            </select>
+          </div>
+        </section>
+
         <!-- Top: प्रति (left), क्रमांक/दिनांक (right) -->
         <section class="form-section section-top-fields">
           <div class="top-fields-row">
@@ -37,45 +48,58 @@
           </div>
         </section>
 
-        <!-- Center Hardcoded Heading (display only in form) -->
-        <section class="form-section section-heading">
+        <!-- General only: message textarea -->
+        <section class="form-section section-general-message general-only" id="section-general-message" aria-hidden="true">
+          <div class="field">
+            <label for="general-message">संदेश</label>
+            <textarea id="general-message" name="general_message" rows="8" placeholder="संदेश लिखें... (पैराग्राफ के रूप में दिखेगा)"></textarea>
+          </div>
+        </section>
+
+        <!-- Center Hardcoded Heading (display only in form, Gun Milan only) -->
+        <section class="form-section section-heading gun-milan-only">
           <p class="hardcoded-heading" aria-hidden="true">॥ गुण मिलान ॥</p>
         </section>
 
         <!-- वर और कन्या -->
-        <section class="form-section section-varkanya">
+        <section class="form-section section-varkanya gun-milan-only">
           <div class="varkanya-grid">
             <!-- वर -->
             <div class="column var-column">
               <h2 class="column-title">वर</h2>
               <div class="field">
                 <label for="var-name">नाम</label>
-                <input type="text" id="var-name" name="var_name" placeholder="उदा. चि. अभिषेक बैरागी" required>
+                <input type="text" id="var-name" name="var_name" placeholder="उदा. चि. अभिषेक बैरागी">
               </div>
               <div class="field">
                 <label for="var-dob">जन्म तिथि</label>
-                <input type="text" id="var-dob" name="var_dob" placeholder="उदा. 08.04.95" required>
+                <input type="text" id="var-dob" name="var_dob" placeholder="उदा. 08.04.95">
               </div>
               <div class="field">
                 <label for="var-time">जन्म समय</label>
-                <input type="text" id="var-time" name="var_time" placeholder="उदा. 03:05" required>
+                <input type="text" id="var-time" name="var_time" placeholder="उदा. 03:05">
               </div>
               <div class="field">
                 <label for="var-place">जन्म स्थान</label>
-                <input type="text" id="var-place" name="var_place" placeholder="उदा. आसींद" required>
+                <input type="text" id="var-place" name="var_place" placeholder="उदा. आसींद">
               </div>
               <div class="field">
                 <label for="var-rashi">राशि</label>
-                <input type="text" id="var-rashi" name="var_rashi" placeholder="उदा. मिथुन" required>
+                <input type="text" id="var-rashi" name="var_rashi" placeholder="उदा. मिथुन">
               </div>
               <div class="field">
                 <label for="var-nakshatra">नक्षत्र</label>
-                <input type="text" id="var-nakshatra" name="var_nakshatra" placeholder="उदा. पुनर्वसु I (के)" required>
+                <input type="text" id="var-nakshatra" name="var_nakshatra" placeholder="उदा. पुनर्वसु I (के)">
+              </div>
+              <div class="field">
+                <label for="var-lagna-navamshesh">लग्न / नवांशेश</label>
+                <input type="text" id="var-lagna-navamshesh" name="var_lagna_navamshesh" placeholder="उदा. मिथुन लग्न">
               </div>
               <div class="field">
                 <label for="var-mangal">मंगल</label>
-                <input type="text" id="var-mangal" name="var_mangal" placeholder="उदा. सप्तम मंगल (कर्क)" required>
+                <input type="text" id="var-mangal" name="var_mangal" placeholder="उदा. सप्तम मंगल (कर्क)">
               </div>
+              <button type="button" class="btn btn-reset-column" id="btn-reset-var">रीसेट वर</button>
             </div>
 
             <!-- कन्या -->
@@ -83,57 +107,62 @@
               <h2 class="column-title">कन्या</h2>
               <div class="field">
                 <label for="kanya-name">नाम</label>
-                <input type="text" id="kanya-name" name="kanya_name" placeholder="उदा. कु. रूपल वैष्णव" required>
+                <input type="text" id="kanya-name" name="kanya_name" placeholder="उदा. कु. रूपल वैष्णव">
               </div>
               <div class="field">
                 <label for="kanya-dob">जन्म तिथि</label>
-                <input type="text" id="kanya-dob" name="kanya_dob" placeholder="उदा. 25.03.95" required>
+                <input type="text" id="kanya-dob" name="kanya_dob" placeholder="उदा. 25.03.95">
               </div>
               <div class="field">
                 <label for="kanya-time">जन्म समय</label>
-                <input type="text" id="kanya-time" name="kanya_time" placeholder="उदा. 09:05" required>
+                <input type="text" id="kanya-time" name="kanya_time" placeholder="उदा. 09:05">
               </div>
               <div class="field">
                 <label for="kanya-place">जन्म स्थान</label>
-                <input type="text" id="kanya-place" name="kanya_place" placeholder="उदा. रावतभाटा" required>
+                <input type="text" id="kanya-place" name="kanya_place" placeholder="उदा. रावतभाटा">
               </div>
               <div class="field">
                 <label for="kanya-rashi">राशि</label>
-                <input type="text" id="kanya-rashi" name="kanya_rashi" placeholder="उदा. धनु" required>
+                <input type="text" id="kanya-rashi" name="kanya_rashi" placeholder="उदा. धनु">
               </div>
               <div class="field">
                 <label for="kanya-nakshatra">नक्षत्र</label>
-                <input type="text" id="kanya-nakshatra" name="kanya_nakshatra" placeholder="उदा. उत्तराषाढ़ा 1 (भे)" required>
+                <input type="text" id="kanya-nakshatra" name="kanya_nakshatra" placeholder="उदा. उत्तराषाढ़ा 1 (भे)">
+              </div>
+              <div class="field">
+                <label for="kanya-lagna-navamshesh">लग्न / नवांशेश</label>
+                <input type="text" id="kanya-lagna-navamshesh" name="kanya_lagna_navamshesh" placeholder="उदा. धनु लग्न">
               </div>
               <div class="field">
                 <label for="kanya-mangal">मंगल</label>
-                <input type="text" id="kanya-mangal" name="kanya_mangal" placeholder="उदा. चतुर्थ मंगल (कर्क)" required>
+                <input type="text" id="kanya-mangal" name="kanya_mangal" placeholder="उदा. चतुर्थ मंगल (कर्क)">
               </div>
+              <button type="button" class="btn btn-reset-column" id="btn-reset-kanya">रीसेट कन्या</button>
             </div>
           </div>
         </section>
 
         <!-- कुल गुण -->
-        <section class="form-section section-kul-gun">
+        <section class="form-section section-kul-gun gun-milan-only">
           <div class="field field-centered">
             <label for="kul-gun">कुल गुण</label>
-            <input type="text" id="kul-gun" name="kul_gun" placeholder="उदा. 27/36" required>
+            <input type="text" id="kul-gun" name="kul_gun" placeholder="उदा. 27/36">
           </div>
         </section>
 
         <!-- विवरण -->
-        <section class="form-section section-vivaran">
+        <section class="form-section section-vivaran gun-milan-only">
           <div class="field">
             <label for="vivaran">विवरण</label>
-            <textarea id="vivaran" name="vivaran" rows="5" placeholder="गुण मिलान का विवरण लिखें..." required></textarea>
+            <textarea id="vivaran" name="vivaran" rows="5" placeholder="गुण मिलान का विवरण लिखें..."></textarea>
           </div>
         </section>
 
         <!-- निष्कर्ष -->
-        <section class="form-section section-nishkarsh">
+        <section class="form-section section-nishkarsh gun-milan-only">
           <div class="field">
             <label for="nishkarsh">निष्कर्ष</label>
-            <input type="text" id="nishkarsh" name="nishkarsh" placeholder="उदा. श्रेष्ठ मिलान" required>
+            <input type="text" id="nishkarsh" name="nishkarsh" placeholder="उदा. श्रेष्ठ मिलान">
           </div>
         </section>
 
