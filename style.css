@@ -98,6 +98,36 @@ body {
   margin-bottom: 0;
 }
 
+/* Document type: Gun Milan vs General – show/hide sections */
+.general-only {
+  display: none;
+}
+
+.form.mode-general .gun-milan-only {
+  display: none !important;
+}
+
+.form.mode-general .general-only {
+  display: block;
+}
+
+.form .field select {
+  width: 100%;
+  font-family: var(--font-hindi);
+  font-size: 1rem;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  color: var(--color-text);
+  background: #fff;
+  cursor: pointer;
+}
+
+.form .field select:focus {
+  outline: none;
+  border-color: var(--color-saffron);
+}
+
 /* Top Right Section - right align on desktop */
 .top-fields-row {
   display: flex;
@@ -158,6 +188,13 @@ body {
   background: rgba(248, 236, 228, 0.4);
   border-radius: var(--radius);
   border: 1px solid rgba(232, 93, 4, 0.15);
+}
+
+.btn-reset-column {
+  margin-top: var(--space-md);
+  width: 100%;
+  font-size: 0.9rem;
+  padding: var(--space-sm) var(--space-md);
 }
 
 /* Fields */
